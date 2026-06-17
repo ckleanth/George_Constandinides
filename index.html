@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Dr. George Constandinides — Mechanical Engineer</title>
+<meta name="description" content="Dr. George Constandinides — Chartered Mechanical Engineer (CEng MIMechE, ETEK, PhD) specialising in CFD, multi-body dynamics, thermal systems and first-principles modelling. Selected work across aerospace, motorsport and energy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#080B11;
+    --bg-2:#0A0E16;
+    --panel:#0D131D;
+    --line:rgba(255,255,255,0.085);
+    --line-2:rgba(255,255,255,0.05);
+    --text:#E9EDF1;
+    --muted:#98A4B1;
+    --faint:#5C6776;
+    --cool:#35D6E0;
+    --warm:#FFC24B;
+    --hot:#FF5E3A;
+    --cool-deep:#072329;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Hanken Grotesk",system-ui,sans-serif;
+    font-size:1.0625rem;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  ::selection{background:transparent;color:inherit}
+  ::-moz-selection{background:transparent;color:inherit}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--cool);outline-offset:3px;border-radius:2px}
+
+  .mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+  .display{font-family:"Space Grotesk",sans-serif}
+
+  .wrap{width:min(1180px,90vw);margin:0 auto}
+  .section{padding:clamp(4.5rem,9vw,8rem) 0;position:relative;scroll-margin-top:4.5rem}
+  .section + .section{border-top:1px solid var(--line-2)}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.05rem clamp(1.25rem,5vw,2.5rem);
+    background:linear-gradient(180deg,rgba(8,11,17,0.82),rgba(8,11,17,0));
+    backdrop-filter:blur(9px);
+    -webkit-backdrop-filter:blur(9px);
+  }
+  .brand{
+    font-family:"IBM Plex Mono",monospace;font-size:.8rem;letter-spacing:.14em;
+    color:var(--text);text-decoration:none;display:inline-flex;align-items:center;gap:.6rem;
+  }
+  .brand .dot{width:8px;height:8px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%,var(--cool),var(--hot));}
+  .nav-links{display:flex;gap:1.7rem;align-items:center}
+  .nav-links a{
+    font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.06em;
+    text-decoration:none;color:var(--muted);transition:color .2s;
+  }
+  .nav-links a:hover{color:var(--cool)}
+  @media (max-width:760px){ .nav-links{display:none} }
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
+  #field{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .hero-scrim{
+    position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(120% 90% at 12% 95%,rgba(8,11,17,0.92) 0%,rgba(8,11,17,0.35) 45%,rgba(8,11,17,0) 75%),
+      linear-gradient(180deg,rgba(8,11,17,0.7) 0%,rgba(8,11,17,0.08) 30%,rgba(8,11,17,0.55) 100%);
+  }
+  .hero-eq{
+    position:absolute;right:clamp(1rem,4vw,2.5rem);bottom:clamp(6.5rem,16vh,9rem);
+    font-family:"IBM Plex Mono",monospace;font-size:clamp(.62rem,1.4vw,.82rem);
+    color:var(--faint);opacity:.5;letter-spacing:.02em;pointer-events:none;
+    text-align:right;line-height:1.9;max-width:60vw;
+  }
+  .hero-inner{position:relative;z-index:2;padding-bottom:clamp(4rem,9vh,7rem);width:100%}
+  .kicker{
+    font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--cool);display:flex;align-items:center;
+    gap:.8rem;flex-wrap:wrap;margin-bottom:1.6rem;
+  }
+  .kicker::before{content:"";width:34px;height:1px;background:var(--cool);opacity:.7}
+  h1{
+    font-family:"Space Grotesk",sans-serif;font-weight:600;
+    font-size:clamp(2.7rem,8.5vw,6.1rem);line-height:0.98;letter-spacing:-0.025em;
+    max-width:14ch;
+  }
+  .thesis{
+    margin-top:1.8rem;max-width:54ch;font-size:clamp(1.05rem,1.6vw,1.3rem);
+    color:#D5DCE3;line-height:1.55;
+  }
+  .meta-strip{
+    margin-top:2.4rem;display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;
+    font-family:"IBM Plex Mono",monospace;font-size:.76rem;letter-spacing:.05em;
+    color:var(--muted);
+  }
+  .meta-strip span{display:inline-flex;align-items:center;gap:1.4rem}
+  .meta-strip span:not(:last-child)::after{content:"";width:4px;height:4px;border-radius:50%;background:var(--faint)}
+
+  .scrollcue{
+    position:absolute;left:clamp(1.25rem,5vw,2.5rem);bottom:1.6rem;z-index:2;
+    font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.16em;
+    color:var(--muted);display:flex;align-items:center;gap:.6rem;
+  }
+  .scrollcue .bar{width:1px;height:34px;background:linear-gradient(var(--cool),transparent);display:inline-block}
+
+  /* ---------- HEADINGS ---------- */
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:.8rem;
+  }
+  .eyebrow::before{content:"";width:8px;height:8px;background:var(--cool);flex:none}
+  .h2{
+    font-family:"Space Grotesk",sans-serif;font-weight:600;
+    font-size:clamp(1.75rem,3.6vw,2.8rem);line-height:1.06;letter-spacing:-0.015em;
+    margin-top:1rem;max-width:18ch;
+  }
+  .lede{margin-top:1.2rem;max-width:62ch;color:var(--muted);font-size:1.08rem}
+
+  /* ---------- FIELDS GRID ---------- */
+  .fields{
+    margin-top:3rem;display:grid;gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:6px;overflow:hidden;
+    grid-template-columns:repeat(auto-fit,minmax(255px,1fr));
+  }
+  .field{background:var(--bg);padding:1.7rem 1.6rem;transition:background .25s}
+  .field:hover{background:var(--bg-2)}
+  .field .fname{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.1rem;line-height:1.22}
+  .field .fdesc{margin-top:.55rem;color:var(--muted);font-size:.94rem;line-height:1.55}
+
+  /* ---------- TIMELINE / WORK ---------- */
+  .timeline{margin-top:3.2rem;position:relative;padding-left:2.4rem}
+  .timeline::before{content:"";position:absolute;left:0;top:.4rem;bottom:.4rem;width:1px;background:var(--line)}
+  .case{position:relative;padding-bottom:3.4rem}
+  .case:last-child{padding-bottom:0}
+  .case::before{
+    content:"";position:absolute;left:-2.4rem;top:.45rem;
+    width:11px;height:11px;border-radius:50%;background:var(--bg);
+    border:1.5px solid var(--cool);box-shadow:0 0 0 4px var(--bg);
+    transform:translateX(-5px);
+  }
+  .case .year{font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.06em;color:var(--cool)}
+  .case .role{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(1.25rem,2.3vw,1.65rem);margin-top:.5rem;line-height:1.12}
+  .case .org{color:var(--text);font-size:.98rem;margin-top:.35rem}
+  .case .org .sub{color:var(--muted)}
+  .case .cdesc{margin-top:1rem;color:var(--muted);max-width:68ch;line-height:1.6}
+  .tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.25rem}
+  .tag{
+    font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.03em;
+    color:var(--muted);border:1px solid var(--line);padding:.32rem .65rem;border-radius:4px;
+  }
+
+  /* ---------- MOTION / EMBED ---------- */
+  .embed-grid{margin-top:3rem;display:grid;gap:2.5rem;grid-template-columns:1fr;align-items:start}
+  @media(min-width:920px){ .embed-grid{grid-template-columns:1.55fr 1fr;gap:3rem} }
+  .embed{position:relative;padding-top:56.25%;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#000}
+  .embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .motion-side p{color:var(--muted);max-width:46ch}
+  .btn-row{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.8rem}
+  .btn{
+    display:inline-flex;align-items:center;gap:.5rem;
+    font-family:"IBM Plex Mono",monospace;font-size:.8rem;letter-spacing:.04em;
+    padding:.72rem 1.15rem;border:1px solid var(--cool);color:var(--cool);
+    border-radius:5px;text-decoration:none;transition:all .22s;background:transparent;
+  }
+  .btn:hover{background:var(--cool);color:#06222a}
+  .btn .arr{font-size:.9em}
+  .btn.ghost{border-color:var(--line);color:var(--text)}
+  .btn.ghost:hover{border-color:var(--cool);color:var(--cool);background:transparent}
+
+  /* ---------- TEACHING ---------- */
+  .teach-card{
+    margin-top:3rem;border:1px solid var(--line);border-radius:8px;background:var(--panel);
+    padding:clamp(1.8rem,4vw,2.8rem);position:relative;overflow:hidden;
+  }
+  .teach-card::after{
+    content:"";position:absolute;top:0;left:0;width:3px;height:100%;
+    background:linear-gradient(var(--cool),var(--warm),var(--hot));
+  }
+  .teach-tag{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.12em;color:var(--cool);text-transform:uppercase}
+  .teach-card h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(1.3rem,2.4vw,1.7rem);margin-top:.7rem}
+  .teach-card p{color:var(--muted);margin-top:.9rem;max-width:64ch}
+
+  /* ---------- PUBLICATIONS ---------- */
+  .refs{margin-top:2.6rem}
+  .ref{display:grid;grid-template-columns:2.4rem 1fr;gap:1.2rem;padding:1.5rem 0;border-top:1px solid var(--line)}
+  .ref:last-child{border-bottom:1px solid var(--line)}
+  .ref .num{font-family:"IBM Plex Mono",monospace;color:var(--faint);font-size:.95rem;padding-top:.15rem}
+  .ref .rtitle{font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:1.1rem;line-height:1.35;color:var(--text)}
+  .ref .authors{color:var(--muted);font-size:.95rem;margin-top:.45rem;line-height:1.5}
+  .ref .authors strong{color:var(--text);font-weight:600}
+  .ref .venue{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--muted);margin-top:.5rem;line-height:1.6}
+  .badge{
+    display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--warm);border:1px solid rgba(255,194,75,.35);
+    padding:.12rem .5rem;border-radius:3px;margin-left:.2rem;vertical-align:middle;
+  }
+  a.link{color:var(--cool);text-decoration:none;border-bottom:1px solid rgba(53,214,224,.32);transition:border-color .2s}
+  a.link:hover{border-color:var(--cool)}
+
+  /* ---------- EDUCATION ---------- */
+  .edu-wrap{margin-top:2.6rem}
+  .edu{display:grid;grid-template-columns:8rem 1fr;gap:1.4rem;padding:1.3rem 0;border-top:1px solid var(--line)}
+  .edu:last-child{border-bottom:1px solid var(--line)}
+  .edu .eyear{font-family:"IBM Plex Mono",monospace;font-size:.82rem;color:var(--cool);padding-top:.15rem}
+  .edu .edeg{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.08rem;line-height:1.25}
+  .edu .einst{color:var(--muted);font-size:.95rem;margin-top:.25rem}
+  .edu .einst em{color:var(--warm);font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.04em;margin-left:.4rem}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  #contact{background:var(--bg-2)}
+  .contact-head{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(2rem,5vw,3.4rem);line-height:1.02;letter-spacing:-0.02em;margin-top:1rem;max-width:16ch}
+  .contact-grid{margin-top:3rem;display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .clink{background:var(--bg);padding:1.5rem 1.6rem;text-decoration:none;display:block;transition:background .22s}
+  .clink:hover{background:var(--panel)}
+  .clink .ctype{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .clink .cval{display:block;margin-top:.55rem;color:var(--text);font-size:1rem;word-break:break-word}
+  .clink:hover .cval{color:var(--cool)}
+
+  footer{padding:2.4rem 0;border-top:1px solid var(--line-2)}
+  .foot-inner{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;
+    font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.05em;color:var(--faint)}
+  .foot-inner .credo{color:var(--muted)}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    .scrollcue .bar{background:var(--cool)}
+  }
+
+  @media (max-width:560px){
+    .hero-eq{display:none}
+    .edu{grid-template-columns:1fr;gap:.4rem}
+    .ref{grid-template-columns:1.8rem 1fr;gap:.8rem}
+    .timeline{padding-left:1.9rem}
+    .case::before{left:-1.9rem}
+  }
+
+  /* ---------- JUMP TO CONTACT (between hero & disciplines) ---------- */
+  .jump-contact{
+    display:flex;align-items:center;justify-content:space-between;gap:1rem 1.5rem;flex-wrap:wrap;
+    width:min(1180px,90vw);margin:0 auto;padding:1.15rem 0;
+    border-bottom:1px solid var(--line-2);text-decoration:none;
+    font-family:"IBM Plex Mono",monospace;font-size:.8rem;letter-spacing:.06em;color:var(--muted);
+    transition:color .25s;
+  }
+  .jump-contact:hover,.jump-contact:focus-visible{color:var(--cool)}
+  .jc-left{display:inline-flex;align-items:center;gap:.75rem}
+  .jc-left::before{content:"";width:7px;height:7px;border-radius:50%;flex:none;
+    background:radial-gradient(circle at 30% 30%,var(--cool),var(--hot))}
+  .jc-right{display:inline-flex;align-items:center;gap:.55rem;color:var(--text)}
+  .jump-contact:hover .jc-right,.jump-contact:focus-visible .jc-right{color:var(--cool)}
+  .jc-arrow{display:inline-block;transition:transform .25s}
+  .jump-contact:hover .jc-arrow,.jump-contact:focus-visible .jc-arrow{transform:translateY(3px)}
+
+  /* ---------- YOUTUBE FACADE (click to load player) ---------- */
+  .yt-poster{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;border:0;
+    cursor:pointer;background:#05070b;display:block;overflow:hidden}
+  .yt-poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    opacity:.6;transition:opacity .35s ease,transform .6s ease}
+  .yt-poster:hover img,.yt-poster:focus-visible img{opacity:.82;transform:scale(1.04)}
+  .yt-grad{position:absolute;inset:0;background:
+    radial-gradient(60% 60% at 50% 45%,rgba(8,11,17,0) 0%,rgba(8,11,17,.35) 100%),
+    linear-gradient(180deg,rgba(8,11,17,.15),rgba(8,11,17,.55))}
+  .yt-play{position:absolute;inset:0;margin:auto;width:64px;height:46px;
+    display:flex;align-items:center;justify-content:center;
+    filter:drop-shadow(0 8px 22px rgba(0,0,0,.55));transition:transform .25s ease}
+  .yt-poster:hover .yt-play,.yt-poster:focus-visible .yt-play{transform:scale(1.09)}
+  .yt-label{position:absolute;left:1rem;bottom:1rem;color:var(--text);
+    font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+    background:rgba(8,11,17,.55);padding:.4rem .65rem;border-radius:5px;
+    -webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
+
+  /* ---------- CONTENT PROTECTION ---------- */
+  html,body{
+    -webkit-touch-callout:none;            /* no iOS long-press copy/save menu */
+  }
+  *{
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+  }
+  img{
+    -webkit-user-drag:none;
+    -khtml-user-drag:none;
+    -moz-user-drag:none;
+    -o-user-drag:none;
+    user-drag:none;
+  }
+
+  /* Contact card stays selectable & copyable so visitors can always reach these */
+  .clink,.clink *{
+    -webkit-user-select:text;
+    -moz-user-select:text;
+    -ms-user-select:text;
+    user-select:text;
+    -webkit-touch-callout:default;
+  }
+
+  /* Neutralise print / print-to-PDF text capture */
+  @media print{
+    body *{visibility:hidden !important}
+    body::before{
+      content:"This portfolio is protected. \00A9 Dr. George Constandinides \2014 please view it online.";
+      visibility:visible;position:fixed;inset:0;display:block;padding:3rem;
+      font-family:"IBM Plex Mono",monospace;font-size:14px;line-height:1.6;color:#000;
+    }
+  }
+
+  /* Copy-attempt toast */
+  .copy-guard{
+    position:fixed;left:50%;bottom:1.5rem;transform:translate(-50%,160%);
+    z-index:9999;max-width:min(90vw,440px);
+    display:flex;align-items:center;gap:.7rem;
+    padding:.8rem 1.1rem;border-radius:8px;
+    background:rgba(13,19,29,0.92);border:1px solid var(--line);
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+    box-shadow:0 12px 40px rgba(0,0,0,0.45);
+    font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.03em;
+    color:var(--text);line-height:1.45;
+    opacity:0;pointer-events:none;
+    transition:opacity .3s ease,transform .35s cubic-bezier(.2,.7,.2,1);
+  }
+  .copy-guard.show{opacity:1;transform:translate(-50%,0)}
+  .copy-guard .cg-dot{
+    width:8px;height:8px;border-radius:50%;flex:none;
+    background:radial-gradient(circle at 30% 30%,var(--cool),var(--hot));
+  }
+  @media (prefers-reduced-motion: reduce){
+    .copy-guard{transition:opacity .2s ease;transform:translate(-50%,0)}
+    .copy-guard:not(.show){opacity:0}
+  }
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Primary">
+  <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span>G. CONSTANDINIDES</a>
+  <div class="nav-links">
+    <a href="#fields">Fields</a>
+    <a href="#work">Work</a>
+    <a href="#motion">Motion</a>
+    <a href="#teaching">Teaching</a>
+    <a href="#publications">Papers</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="hero-eq mono" aria-hidden="true">
+    ρ(∂v/∂t + v·∇v) = −∇p + μ∇²v + f
+  </div>
+  <div class="hero-inner">
+    <div class="wrap">
+      <p class="kicker">Mechanical Engineer · Limassol, Cyprus</p>
+      <h1>Dr. George<br>Constandinides</h1>
+      <p class="thesis">
+        I turn the physics of heat, flow, and motion into computational models —
+        the kind that predict how aircraft, engines, and energy systems behave
+        from first principles, before they are built.
+      </p>
+      <div class="meta-strip">
+        <span>CEng MIMechE, ETEK · PhD</span>
+        <span>Thermodynamics / Fluid Mechanics / Dynamics</span>
+        <span>22+ years</span>
+      </div>
+    </div>
+  </div>
+  <div class="scrollcue" aria-hidden="true"><span class="bar"></span>SCROLL</div>
+</header>
+
+<!-- ============ JUMP TO CONTACT ============ -->
+<a class="jump-contact" href="#contact" aria-label="Jump to the contact section">
+  <span class="jc-left">Open to research collaboration, consulting &amp; speaking</span>
+  <span class="jc-right">Get in touch <span class="jc-arrow" aria-hidden="true">&darr;</span></span>
+</a>
+
+<!-- ============ DISCIPLINES ============ -->
+<section class="section" id="fields">
+  <div class="wrap">
+    <p class="eyebrow reveal">Fields of work</p>
+    <h2 class="h2 reveal">Seven connected disciplines, one method.</h2>
+    <p class="lede reveal">Describe the governing physics, then solve it — whether the domain is a combustion chamber, a landing gear, or the open ocean.</p>
+    <div class="fields reveal">
+      <div class="field">
+        <div class="fname">Computational Fluid Dynamics</div>
+        <div class="fdesc">Multiphase, reacting, Non Newtonian and electro-magneto-hydrodynamic flows, built and solved in ANSYS CFX.</div>
+      </div>
+      <div class="field">
+        <div class="fname">Multi-Body Dynamics</div>
+        <div class="fdesc">Mechanism, suspension, and landing-gear dynamics modelled and correlated in MSC ADAMS.</div>
+      </div>
+      <div class="field">
+        <div class="fname">Thermal Systems &amp; Heat Transfer</div>
+        <div class="fdesc">Thermal management from the combustion chamber to the deep ocean.</div>
+      </div>
+      <div class="field">
+        <div class="fname">Hydraulics &amp; 1D Modelling</div>
+        <div class="fdesc">System-level models in AMESim and bespoke first-principles tools using Python or MATLAB for gas–liquid springs.</div>
+      </div>
+      <div class="field">
+        <div class="fname">Systems Engineering</div>
+        <div class="fdesc">Requirements definition, validation, and verification of complex coupled systems.</div>
+      </div>
+      <div class="field">
+        <div class="fname">Finite Element Analysis &amp; CAD</div>
+        <div class="fdesc">Structural assessment and design geometry for loaded mechanical components.</div>
+      </div>
+      <div class="field">
+        <div class="fname">Simulation Software</div>
+        <div class="fdesc">Engineering analysis and data-processing tools written in Python or MATLAB.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORK ============ -->
+<section class="section" id="work">
+  <div class="wrap">
+    <p class="eyebrow reveal">Selected work</p>
+    <h2 class="h2 reveal">Two decades of building models that predict.</h2>
+    <p class="lede reveal">A career plotted against time — from doctoral research to chartered practice across aerospace, industrial, and energy systems.</p>
+
+    <div class="timeline">
+      <article class="case reveal">
+        <div class="year mono">2024 — present</div>
+        <h3 class="role">Research Associate</h3>
+        <p class="org">Cyprus University of Technology <span class="sub">· Limassol</span></p>
+        <p class="cdesc">
+          On the HydrOTEC project, developing Systems using 0-1D analytical and CFD models for green-hydrogen production
+          driven by Solar-Assisted Ocean Thermal Energy Conversion — extracting useful work from the
+          temperature difference between warm surface water and the cold deep ocean.
+		  Also a lecturer at the Technical University of Cyprus.
+        </p>
+        <div class="tags">
+          <span class="tag">Analytical modelling</span>
+          <span class="tag">Thermodynamics</span>
+          <span class="tag">CFD</span>
+          <span class="tag">1D Thermal</span>
+          <span class="tag">OTEC</span>
+          <span class="tag">Hydrogen</span>
+          <span class="tag">Teaching</span>
+        </div>
+      </article>
+
+      <article class="case reveal">
+        <div class="year mono">2010 — 2024 · 14 years</div>
+        <h3 class="role">Performance &amp; Dynamics Engineer</h3>
+        <p class="org">Safran Landing Systems UK <span class="sub">· ex Messier-Bugatti-Dowty</span></p>
+        <p class="cdesc">
+          Lead modeller for aircraft landing-gear systems — extension/retraction, steering, and
+          shock-absorber behaviour. Built and correlated multi-body dynamic models in MSC ADAMS coupled
+          to hydraulic and control-system models, and maintained in-house prediction software for
+          oleo-pneumatic (gas–liquid) springs. Supported requirements definition, verification and
+          validation test campaigns, and the development of analysis methods and tools.
+        </p>
+        <div class="tags">
+          <span class="tag">MSC ADAMS MBD</span>
+          <span class="tag">Hydraulics</span>
+          <span class="tag">Control systems</span>
+          <span class="tag">Oleo-pneumatic springs</span>
+          <span class="tag">V&amp;V</span>
+        </div>
+      </article>
+
+      <article class="case reveal">
+        <div class="year mono">2008 — 2010 · 2 yr 7 mo</div>
+        <h3 class="role">CFD / Design Engineer</h3>
+        <p class="org">Tetronics <span class="sub">· Swindon</span></p>
+        <p class="cdesc">
+          Designed the internal cavity of industrial plasma converters and built the CFD models that
+          simulate what happens inside them. The physics spanned electro-magneto-hydrodynamic plasma-arc
+          dissociation and radiation, Eulerian–Lagrangian particle capture, combustion and reaction
+          mechanisms, and non-Newtonian multiphase flow modelling the motion and solidification of molten
+          metal and slag — all to optimise furnace geometry against real operating conditions.
+        </p>
+        <div class="tags">
+          <span class="tag">ANSYS CFX</span>
+          <span class="tag">CFD</span>
+          <span class="tag">Plasma / EMHD</span>
+          <span class="tag">Combustion</span>
+          <span class="tag">Multiphase</span>
+		  <span class="tag">Non Newtonian</span>
+		  <span class="tag">Solidification</span>
+        </div>
+      </article>
+
+      <article class="case reveal">
+        <div class="year mono">2005 — 2008</div>
+        <h3 class="role">Research Engineer (PhD)</h3>
+        <p class="org">University of Birmingham <span class="sub">· sponsored by Jaguar Cars</span></p>
+        <p class="cdesc">
+          Doctoral research on the thermal management and control of an engine running in HCCI
+          (Homogeneous Charge Compression Ignition) mode. Combined CFD with 1D thermal modelling and
+          real-time control in MATLAB/Simulink, supported by engine experimentation.
+        </p>
+        <div class="tags">
+          <span class="tag">HCCI</span>
+          <span class="tag">MATLAB / Simulink</span>
+          <span class="tag">1D Thermal</span>
+          <span class="tag">CFD</span>
+          <span class="tag">Engine testing</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MOTION ============ -->
+<section class="section" id="motion">
+  <div class="wrap">
+    <p class="eyebrow reveal">Work in motion</p>
+    <h2 class="h2 reveal">Predictions you can watch.</h2>
+    <div class="embed-grid">
+      <div class="embed reveal" id="ytFacade" data-video="HBQ-liI4Q_I" data-list="PL8BF55024917C2F8E">
+		<button class="yt-poster" type="button" aria-label="Play the work showcase on YouTube">
+          <img src="https://i.ytimg.com/vi/HBQ-liI4Q_I/hqdefault.jpg" alt="" loading="lazy" decoding="async">
+          <span class="yt-grad" aria-hidden="true"></span>
+          <span class="yt-play" aria-hidden="true"><svg viewBox="0 0 68 48" width="64" height="46" focusable="false"><path d="M66.5 7.7c-.8-2.9-2.5-5.2-5.4-6C55.8.5 34 .5 34 .5S12.2.5 6.9 1.7C4 2.5 2.3 4.8 1.5 7.7.3 13 .3 24 .3 24s0 11 1.2 16.3c.8 2.9 2.5 5.2 5.4 6C12.2 47.5 34 47.5 34 47.5s21.8 0 27.1-1.2c2.9-.8 4.6-3.1 5.4-6C67.7 35 67.7 24 67.7 24s0-11-1.2-16.3z" fill="#FF5E3A"/><path d="M27 34l18-10-18-10z" fill="#080B11"/></svg></span>
+          <span class="yt-label mono">Watch the showcase</span>
+        </button>
+      </div>
+      <div class="motion-side reveal">
+        <p>
+          A selection of aircraft landing-gear predictions and CFD simulations — the models described
+          above, solved and rendered. Plasma arcs, multiphase flows, and landing dynamics, animated
+          from the solver output.
+        </p>
+        <div class="btn-row">
+          <a class="btn" href="https://www.youtube.com/playlist?list=PL8BF55024917C2F8E" target="_blank" rel="noopener">Open Work showcase playlist <span class="arr">↗</span></a>
+          <a class="btn ghost" href="https://www.youtube.com/ckleanth" target="_blank" rel="noopener">Channel <span class="arr">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEACHING ============ -->
+<section class="section" id="teaching">
+  <div class="wrap">
+    <p class="eyebrow reveal">Teaching</p>
+    <h2 class="h2 reveal">Numerical modelling, from the ground up.</h2>
+    <div class="teach-card reveal">
+      <span class="teach-tag mono">Bespoke Lecture course by Dr. George Constandinides</span>
+      <h3>Principles of Numerical Modelling — Filling &amp; Emptying Volumes Systems</h3>
+      <p>
+        A lecture course teaching engineers the principles of numerical modelling — and, specifically,
+        how filling-and-emptying models work and what they actually represent. The same first-principles
+        thinking that underpins the work above, written down and made teachable.
+      </p>
+      <div class="btn-row">
+        <a class="btn" href="https://ckleanth.github.io/Numerical_modelling_filling_emptying/" target="_blank" rel="noopener">Open the course <span class="arr">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PUBLICATIONS ============ -->
+<section class="section" id="publications">
+  <div class="wrap">
+    <p class="eyebrow reveal">Publications</p>
+    <h2 class="h2 reveal">Peer-reviewed and in review.</h2>
+    <div class="refs reveal">
+
+      <div class="ref">
+        <div class="num mono">01</div>
+        <div>
+          <div class="rtitle">Ocean Thermal Energy Conversion and Utilization — A Practical Analytical Model Approach &amp; Case Study <span class="badge">In review</span></div>
+          <div class="authors"><strong>G. Constandinides</strong>, L. Aresti, D. Graikos, T. Onoufriou, P. Christodoulides</div>
+          <div class="venue mono">Submitted — Energies</div>
+        </div>
+      </div>
+
+      <div class="ref">
+        <div class="num mono">02</div>
+        <div>
+          <div class="rtitle">Optical and Thermal Performance of Linear Fresnel Reflectors in Eastern Mediterranean Conditions <span class="badge">In review</span></div>
+          <div class="authors">D. Graikos, <strong>G. Constandinides</strong>, L. Aresti, T. Onoufriou, P. Christodoulides</div>
+          <div class="venue mono">Submitted — Energies</div>
+        </div>
+      </div>
+
+      <div class="ref">
+        <div class="num mono">03</div>
+        <div>
+          <div class="rtitle">Investigation on Combined Effects of Sweep and Spanwise Changing Design Circulation on Airfoil Aerodynamics</div>
+          <div class="authors">J. Vad, <strong>G. Constandinides</strong>, F. Peretti, M. Gutermuth, T. Régert</div>
+          <div class="venue mono">CMFF'03, Conf. on Modelling Fluid Flow · Budapest, 2003 · Vol. 1, pp. 145–152</div>
+        </div>
+      </div>
+
+      <div class="ref">
+        <div class="num mono">04</div>
+        <div>
+          <div class="rtitle">Modelling and Experimental Study of a Thermal Management System for HCCI</div>
+          <div class="authors"><strong>G. Constandinides</strong>, J. Misztal</div>
+          <div class="venue mono">10th Int. Conf. on Engines &amp; Vehicles · SAE Technical Paper 2011-24-0160 · 2011</div>
+        </div>
+      </div>
+
+      <div class="ref">
+        <div class="num mono">05</div>
+        <div>
+          <div class="rtitle">Influence of Inlet Air Temperature on Gasoline HCCI Particulate Emissions</div>
+          <div class="authors">J. Misztal, <strong>G. Constandinides</strong>, H. Xu, A. Tsolakis, M. L. Wyszynski, P. Price, R. Stone, J. Qiao</div>
+          <div class="venue mono">Combustion Science and Technology · Vol. 181(5), 2009 · pp. 695–710 · <a class="link" href="https://doi.org/10.1080/00102200902851610" target="_blank" rel="noopener">DOI ↗</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section class="section" id="education">
+  <div class="wrap">
+    <p class="eyebrow reveal">Education</p>
+    <h2 class="h2 reveal">The foundations.</h2>
+    <div class="edu-wrap reveal">
+      <div class="edu">
+        <div class="eyear mono">2005–2008</div>
+        <div>
+          <div class="edeg">PhD — Thermal Management &amp; Control of an HCCI Engine</div>
+          <div class="einst">University of Birmingham</div>
+        </div>
+      </div>
+      <div class="edu">
+        <div class="eyear mono">2003–2004</div>
+        <div>
+          <div class="edeg">MSc — Automotive Engineering</div>
+          <div class="einst">Coventry University <em>Distinction</em></div>
+        </div>
+      </div>
+      <div class="edu">
+        <div class="eyear mono">2001–2003</div>
+        <div>
+          <div class="edeg">BSc — Mechanical Engineering</div>
+          <div class="einst">Budapest University of Technology &amp; Economics <em>1st Class Hons</em></div>
+        </div>
+      </div>
+      <div class="edu">
+        <div class="eyear mono">1997–2000</div>
+        <div>
+          <div class="edeg">HND — Mechanical Engineering</div>
+          <div class="einst">Higher Institute of Technology <em>Final Year Project Award</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <p class="eyebrow reveal">Contact</p>
+    <h2 class="contact-head reveal">Let's model something.</h2>
+    <p class="lede reveal">For research collaboration, consulting, or questions about the work above.</p>
+    <div class="contact-grid reveal">
+      <a class="clink" href="mailto:g.constandinides@cut.ac.cy">
+        <span class="ctype mono">Email · Academic</span>
+        <span class="cval">g.constandinides@cut.ac.cy</span>
+      </a>
+      <a class="clink" href="mailto:ckleanth@hotmail.com">
+        <span class="ctype mono">Email · Personal</span>
+        <span class="cval">ckleanth@hotmail.com</span>
+      </a>
+      <a class="clink" href="https://www.linkedin.com/in/georgeconstandinides/" target="_blank" rel="noopener">
+        <span class="ctype mono">LinkedIn ↗</span>
+        <span class="cval">/in/georgeconstandinides</span>
+      </a>
+      <a class="clink" href="https://www.youtube.com/ckleanth" target="_blank" rel="noopener">
+        <span class="ctype mono">YouTube ↗</span>
+        <span class="cval">youtube.com/ckleanth</span>
+      </a>
+    </div>
+  </div>
+  <footer>
+    <div class="wrap foot-inner">
+      <span class="credo">Dr. George Constandinides · CEng MIMechE, ETEK · PhD · Limassol, Cyprus</span>
+      <span>FROM FIRST PRINCIPLES TO PREDICTION</span>
+    </div>
+  </footer>
+</section>
+
+<script>
+/* ---------- Streamline flow field (hero) ---------- */
+(function(){
+  var canvas = document.getElementById('field');
+  if(!canvas) return;
+  var ctx = canvas.getContext('2d', { alpha:false });
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W=0,H=0,dpr=1,particles=[],raf=null,running=false,t=0;
+
+  /* thermal colormap: cyan -> gold -> ember */
+  var stops=[[0.0,[53,214,224]],[0.5,[255,194,75]],[1.0,[255,94,61]]];
+  function ramp(v){
+    if(v<0)v=0; if(v>1)v=1;
+    for(var i=0;i<stops.length-1;i++){
+      var a=stops[i],b=stops[i+1];
+      if(v>=a[0]&&v<=b[0]){
+        var f=(v-a[0])/(b[0]-a[0]);
+        return [ (a[1][0]+(b[1][0]-a[1][0])*f)|0,
+                 (a[1][1]+(b[1][1]-a[1][1])*f)|0,
+                 (a[1][2]+(b[1][2]-a[1][2])*f)|0 ];
+      }
+    }
+    return stops[stops.length-1][1];
+  }
+  function angle(x,y,tt){
+    var s=0.0016;
+    var a = Math.sin(x*s + tt*0.15)*1.3
+          + Math.cos(y*s*1.1 - tt*0.12)*1.1
+          + Math.sin((x+y)*s*0.6 + tt*0.08)*0.9;
+    return a*1.2;
+  }
+  function scalar(x,y,tt){
+    var s=0.0011;
+    var v = 0.5
+      + 0.32*Math.sin(x*s*1.2 + tt*0.10)
+      + 0.30*Math.cos(y*s*1.4 - tt*0.07)
+      + 0.18*Math.sin((x-y)*s*0.9 + tt*0.05);
+    return v<0?0:(v>1?1:v);
+  }
+  function spawn(){ return { x:Math.random()*W, y:Math.random()*H, age:Math.random()*180, life:130+Math.random()*170 }; }
+  function initParticles(){
+    var count=Math.max(240,Math.min(1000,Math.floor((W*H)/1500)));
+    particles=new Array(count);
+    for(var i=0;i<count;i++) particles[i]=spawn();
+  }
+  function paintBg(){ ctx.fillStyle='#080B11'; ctx.fillRect(0,0,W,H); }
+
+  function resize(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    W=canvas.clientWidth; H=canvas.clientHeight;
+    if(W===0||H===0) return;
+    canvas.width=Math.floor(W*dpr); canvas.height=Math.floor(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    initParticles(); paintBg();
+    if(reduce) drawStatic();
+  }
+
+  var SPEED=1.55;
+  function step(){
+    ctx.fillStyle='rgba(8,11,17,0.085)';
+    ctx.fillRect(0,0,W,H);
+    ctx.lineWidth=1.1; ctx.lineCap='round';
+    for(var i=0;i<particles.length;i++){
+      var p=particles[i];
+      var ang=angle(p.x,p.y,t);
+      var nx=p.x+Math.cos(ang)*SPEED, ny=p.y+Math.sin(ang)*SPEED;
+      var c=ramp(scalar(p.x,p.y,t));
+      var fade=Math.sin(Math.min(1,p.age/p.life)*Math.PI);
+      var alpha=0.40*fade;
+      ctx.strokeStyle='rgba('+c[0]+','+c[1]+','+c[2]+','+alpha.toFixed(3)+')';
+      ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(nx,ny); ctx.stroke();
+      p.x=nx; p.y=ny; p.age++;
+      if(p.age>p.life||nx<-12||nx>W+12||ny<-12||ny>H+12) particles[i]=spawn();
+    }
+    t+=1;
+  }
+  function loop(){ if(!running) return; step(); raf=requestAnimationFrame(loop); }
+
+  function drawStatic(){
+    paintBg();
+    var seeds=Math.max(120,Math.min(420,Math.floor((W*H)/3600)));
+    ctx.lineWidth=1.0; ctx.lineCap='round';
+    for(var s=0;s<seeds;s++){
+      var x=Math.random()*W,y=Math.random()*H,steps=95;
+      for(var k=0;k<steps;k++){
+        var ang=angle(x,y,0);
+        var nx=x+Math.cos(ang)*1.6, ny=y+Math.sin(ang)*1.6;
+        var c=ramp(scalar(x,y,0));
+        var fade=Math.sin((k/steps)*Math.PI);
+        ctx.strokeStyle='rgba('+c[0]+','+c[1]+','+c[2]+','+(0.5*fade).toFixed(3)+')';
+        ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(nx,ny); ctx.stroke();
+        x=nx; y=ny; if(x<0||x>W||y<0||y>H) break;
+      }
+    }
+  }
+
+  function start(){ if(running||reduce) return; running=true; loop(); }
+  function stop(){ running=false; if(raf) cancelAnimationFrame(raf); raf=null; }
+
+  var rt=null;
+  window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(resize,180); });
+  document.addEventListener('visibilitychange',function(){ if(document.hidden) stop(); else start(); });
+
+  var hero=document.getElementById('top');
+  if('IntersectionObserver' in window && hero){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) start(); else stop(); }); },{threshold:0.02});
+    io.observe(hero);
+  }
+
+  resize();
+  if(!reduce) start();
+})();
+
+/* ---------- Scroll reveal ---------- */
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els=document.querySelectorAll('.reveal');
+  if(reduce||!('IntersectionObserver' in window)){
+    els.forEach(function(el){ el.classList.add('in'); }); return;
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(el){ io.observe(el); });
+})();
+
+/* ---------- YouTube facade: lazy player + Error 153 fallback ---------- */
+(function(){
+  var fac=document.getElementById('ytFacade');
+  if(!fac) return;
+  var btn=fac.querySelector('.yt-poster');
+  if(!btn) return;
+  var vid=fac.getAttribute('data-video');
+  var list=fac.getAttribute('data-list');
+  var isFile=(location.protocol==='file:');
+  function watchURL(){ var u='https://www.youtube.com/watch?v='+vid; if(list){u+='&list='+list;} return u; }
+  function embedURL(){ var u='https://www.youtube-nocookie.com/embed/'+vid+'?rel=0&autoplay=1'; if(list){u+='&list='+list;} return u; }
+  btn.addEventListener('click',function(){
+    /* A page opened directly from disk (file://) cannot send the HTTP referrer
+       that YouTube now requires, which is what produces Error 153. There we open
+       the video on YouTube, where it always plays. When the page is served over
+       http(s) - e.g. GitHub Pages - load the player inline instead. */
+    if(isFile){ window.open(watchURL(),'_blank','noopener'); return; }
+    var f=document.createElement('iframe');
+    f.src=embedURL();
+    f.title='Aircraft landing predictions and CFD simulations';
+    f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    f.setAttribute('referrerpolicy','strict-origin-when-cross-origin');
+    f.setAttribute('allowfullscreen','');
+    fac.innerHTML='';
+    fac.appendChild(f);
+  });
+})();
+
+/* ---------- Content protection + reliable contact actions ---------- */
+(function(){
+  var NOTICE = '\u00A9 Dr. George Constandinides \u2014 Mechanical Engineer.\n'
+             + 'This content is protected.';
+  function attribution(){
+    var http = (location.protocol === 'http:' || location.protocol === 'https:');
+    return NOTICE + (http ? '\nOriginal: ' + location.href : '');
+  }
+
+  /* The contact card is deliberately exempt — visitors must be able to reach these */
+  function inContact(node){
+    while(node){
+      if(node.nodeType === 1 && node.classList && node.classList.contains('clink')) return true;
+      node = node.parentNode;
+    }
+    return false;
+  }
+  function selectionInContact(){
+    var sel = window.getSelection && window.getSelection();
+    if(!sel || sel.rangeCount === 0) return false;
+    return inContact(sel.anchorNode) || inContact(sel.focusNode);
+  }
+
+  /* Restrained toast, built from the page's own tokens */
+  var toast, msgEl, hideTimer;
+  var DEFAULT_MSG = 'This content is protected and can\u2019t be copied.';
+  function flash(text){
+    if(!toast){
+      toast = document.createElement('div');
+      toast.className = 'copy-guard';
+      toast.setAttribute('role','status');
+      toast.setAttribute('aria-live','polite');
+      var dot = document.createElement('span');
+      dot.className = 'cg-dot'; dot.setAttribute('aria-hidden','true');
+      msgEl = document.createElement('span');
+      toast.appendChild(dot); toast.appendChild(msgEl);
+      document.body.appendChild(toast);
+    }
+    msgEl.textContent = text || DEFAULT_MSG;
+    toast.classList.add('show');
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(function(){ toast.classList.remove('show'); }, 2600);
+  }
+
+  /* Clipboard write that works on https AND file:// */
+  var allowCopyOnce = false;            /* lets our own copy bypass the poison below */
+  function legacyCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly','');
+    ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;user-select:text;-webkit-user-select:text';
+    document.body.appendChild(ta);
+    ta.select(); try{ ta.setSelectionRange(0, text.length); }catch(_){}
+    var ok = false;
+    try{ allowCopyOnce = true; ok = document.execCommand('copy'); }catch(_){ ok = false; }
+    allowCopyOnce = false;
+    document.body.removeChild(ta);
+    return ok;
+  }
+  function copyText(text){
+    if(navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext){
+      return navigator.clipboard.writeText(text)
+        .then(function(){ return true; })
+        .catch(function(){ return legacyCopy(text); });
+    }
+    return Promise.resolve(legacyCopy(text));
+  }
+
+  /* Anything that still reaches the clipboard is replaced with an attribution notice */
+  function poison(e){
+    if(allowCopyOnce) return;            /* our own programmatic copy */
+    if(selectionInContact()) return;     /* allow copying contact details */
+    var cd = e.clipboardData || window.clipboardData;
+    if(cd){
+      try{
+        cd.setData('text/plain', attribution());
+        cd.setData('text/html', '<p>' + attribution().replace(/\n/g,'<br>') + '</p>');
+      }catch(_){}
+    }
+    e.preventDefault();
+    flash();
+  }
+  document.addEventListener('copy', poison, true);
+  document.addEventListener('cut',  poison, true);
+
+  /* Close the obvious extraction paths (contact card exempted) */
+  document.addEventListener('contextmenu', function(e){ if(inContact(e.target)) return; e.preventDefault(); flash(); }, true);
+  document.addEventListener('dragstart',   function(e){ e.preventDefault(); }, true);
+  document.addEventListener('selectstart', function(e){ if(inContact(e.target)) return; e.preventDefault(); }, true);
+
+  /* Shortcuts: copy / cut / select-all / save / view-source / print, plus a light devtools deterrent */
+  document.addEventListener('keydown', function(e){
+    var k = (e.key || '').toLowerCase();
+    var mod = e.ctrlKey || e.metaKey;
+    if(mod && ['c','x','a','s','u','p'].indexOf(k) !== -1){
+      if((k === 'c' || k === 'x') && selectionInContact()) return;   /* allow copying contact details */
+      e.preventDefault();
+      if(k === 'c' || k === 'x' || k === 'a') flash();
+      return;
+    }
+    if(e.key === 'F12'){ e.preventDefault(); return; }
+    if(mod && e.shiftKey && ['i','j','c'].indexOf(k) !== -1){ e.preventDefault(); }
+  }, true);
+
+  /* Reliable email: native mailto still fires for anyone with a mail client;
+     we also copy the address as a guaranteed fallback for those without one. */
+  function initMail(){
+    var links = document.querySelectorAll('a[href^="mailto:"]');
+    Array.prototype.forEach.call(links, function(a){
+      a.addEventListener('click', function(){
+        var addr = (a.getAttribute('href') || '').replace(/^mailto:/i,'').split('?')[0];
+        if(!addr) return;
+        /* No preventDefault: if a handler is registered, the mail client opens. */
+        copyText(addr).then(function(ok){
+          flash(ok ? 'Email address copied \u2014 opening your mail app\u2026 (paste it if nothing opens)'
+                   : 'Email: ' + addr);
+        });
+      });
+    });
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', initMail); }
+  else{ initMail(); }
+})();
+</script>
+</body>
+</html>
