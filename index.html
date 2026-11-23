@@ -196,6 +196,10 @@
   .teach-tag{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.12em;color:var(--cool);text-transform:uppercase}
   .teach-card h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(1.3rem,2.4vw,1.7rem);margin-top:.7rem}
   .teach-card p{color:var(--muted);margin-top:.9rem;max-width:64ch}
+  .teach-grid{margin-top:3rem;display:grid;gap:1.5rem;grid-template-columns:1fr}
+  @media(min-width:920px){ .teach-grid{grid-template-columns:1fr 1fr} }
+  .teach-grid .teach-card{margin-top:0;display:flex;flex-direction:column}
+  .teach-grid .btn-row{margin-top:auto;padding-top:1.8rem}
 
   /* ---------- PUBLICATIONS ---------- */
   .refs{margin-top:2.6rem}
@@ -349,6 +353,10 @@
     .copy-guard{transition:opacity .2s ease;transform:translate(-50%,0)}
     .copy-guard:not(.show){opacity:0}
   }
+  /* publication list from publications.js (draft protected_3) */
+  .pub-group{font-family:"IBM Plex Mono",monospace;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cool);margin:2.2rem 0 .2rem}
+  .pub-group:first-child{margin-top:0}
+  .pub-updated{font-size:.78rem;color:var(--faint);margin-top:1.2rem}
 </style>
 </head>
 <body>
@@ -561,6 +569,7 @@
   <div class="wrap">
     <p class="eyebrow reveal">Teaching</p>
     <h2 class="h2 reveal">Numerical modelling, from the ground up.</h2>
+    <div class="teach-grid">
     <div class="teach-card reveal">
       <span class="teach-tag mono">Bespoke Lecture course by Dr. George Constandinides</span>
       <h3>Principles of Numerical Modelling — Filling &amp; Emptying Volumes Systems</h3>
@@ -573,6 +582,19 @@
         <a class="btn" href="https://ckleanth.github.io/Numerical_modelling_filling_emptying/" target="_blank" rel="noopener">Open the course <span class="arr">↗</span></a>
       </div>
     </div>
+    <div class="teach-card reveal">
+      <span class="teach-tag mono">Student CFD applications by Dr. George Constandinides</span>
+      <h3>CFD in Applied Thermodynamics — By Hand, in CFX and in OpenFOAM</h3>
+      <p>
+        Two problems for students: a converging-diverging nozzle and an evaporative spray cooler.
+        Students solve each by hand first, then in Ansys CFX and in OpenFOAM, judge every simulation
+        against their own calculation, and see where the theory's assumptions stop holding.
+      </p>
+      <div class="btn-row">
+        <a class="btn" href="https://ckleanth.github.io/CFD_Applied_Thermodynamics/" target="_blank" rel="noopener">Open the CFD applications <span class="arr">↗</span></a>
+      </div>
+    </div>
+    </div>
   </div>
 </section>
 
@@ -580,55 +602,9 @@
 <section class="section" id="publications">
   <div class="wrap">
     <p class="eyebrow reveal">Publications</p>
-    <h2 class="h2 reveal">Peer-reviewed and in review.</h2>
-    <div class="refs reveal">
-
-      <div class="ref">
-        <div class="num mono">01</div>
-        <div>
-          <div class="rtitle">Ocean Thermal Energy Conversion and Utilization — A Practical Analytical Model Approach &amp; Case Study <span class="badge">In review</span></div>
-          <div class="authors"><strong>G. Constandinides</strong>, L. Aresti, D. Graikos, T. Onoufriou, P. Christodoulides</div>
-          <div class="venue mono">Submitted — Energies</div>
-        </div>
-      </div>
-
-      <div class="ref">
-        <div class="num mono">02</div>
-        <div>
-          <div class="rtitle">Optical and Thermal Performance of Linear Fresnel Reflectors in Eastern Mediterranean Conditions <span class="badge">In review</span></div>
-          <div class="authors">D. Graikos, <strong>G. Constandinides</strong>, L. Aresti, T. Onoufriou, P. Christodoulides</div>
-          <div class="venue mono">Submitted — Energies</div>
-        </div>
-      </div>
-
-      <div class="ref">
-        <div class="num mono">03</div>
-        <div>
-          <div class="rtitle">Investigation on Combined Effects of Sweep and Spanwise Changing Design Circulation on Airfoil Aerodynamics</div>
-          <div class="authors">J. Vad, <strong>G. Constandinides</strong>, F. Peretti, M. Gutermuth, T. Régert</div>
-          <div class="venue mono">CMFF'03, Conf. on Modelling Fluid Flow · Budapest, 2003 · Vol. 1, pp. 145–152</div>
-        </div>
-      </div>
-
-      <div class="ref">
-        <div class="num mono">04</div>
-        <div>
-          <div class="rtitle">Modelling and Experimental Study of a Thermal Management System for HCCI</div>
-          <div class="authors"><strong>G. Constandinides</strong>, J. Misztal</div>
-          <div class="venue mono">10th Int. Conf. on Engines &amp; Vehicles · SAE Technical Paper 2011-24-0160 · 2011</div>
-        </div>
-      </div>
-
-      <div class="ref">
-        <div class="num mono">05</div>
-        <div>
-          <div class="rtitle">Influence of Inlet Air Temperature on Gasoline HCCI Particulate Emissions</div>
-          <div class="authors">J. Misztal, <strong>G. Constandinides</strong>, H. Xu, A. Tsolakis, M. L. Wyszynski, P. Price, R. Stone, J. Qiao</div>
-          <div class="venue mono">Combustion Science and Technology · Vol. 181(5), 2009 · pp. 695–710 · <a class="link" href="https://doi.org/10.1080/00102200902851610" target="_blank" rel="noopener">DOI ↗</a></div>
-        </div>
-      </div>
-
-    </div>
+    <h2 class="h2 reveal">Papers, manuscripts and open data.</h2>
+    <div class="refs reveal" id="pub-list" aria-live="polite"></div>
+    <p class="pub-updated mono" id="pub-updated"></p>
   </div>
 </section>
 
@@ -703,6 +679,76 @@
   </footer>
 </section>
 
+<script src="publications.js"></script>
+<script>
+/* Publication list. It renders window.GC_PUBLICATIONS, which publications.js sets, into #pub-list
+   (or #pubs, filtered by its data-tags). To update the list, replace publications.js only:
+   this page never changes. publications.js is built by Publications/build_publications.py. */
+(function(){
+  var data = window.GC_PUBLICATIONS;
+  var host = document.getElementById('pub-list') || document.getElementById('pubs');
+  if (!host) return;
+  if (!data || !data.items) { host.textContent = 'The publication list could not be loaded.'; return; }
+  var owner = data.owner || '';
+  var tags = (host.getAttribute('data-tags') || '').split(',').map(function(t){ return t.trim(); }).filter(Boolean);
+  var items = data.items.filter(function(p){
+    return !tags.length || (p.tags || []).some(function(t){ return tags.indexOf(t) >= 0; });
+  });
+  var groups = [
+    ['Journal articles', function(p){ return p.category === 'journal' && (p.status === 'published' || p.status === 'accepted'); }],
+    ['Conference and technical papers', function(p){ return p.category === 'conference' && (p.status === 'published' || p.status === 'accepted'); }],
+    ['Under review', function(p){ return p.status === 'under-review' || p.status === 'submitted'; }],
+    ['In preparation', function(p){ return p.status === 'in-preparation'; }],
+    ['Open data and models', function(p){ return p.category === 'data'; }]
+  ];
+  var badges = {'accepted': 'Accepted', 'under-review': 'In review', 'submitted': 'Submitted', 'in-preparation': 'In preparation'};
+  function el(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function shown(a){ var i = a.indexOf(', '); return i < 0 ? a : a.slice(i + 2) + ' ' + a.slice(0, i); }
+  var n = 0;
+  groups.forEach(function(g){
+    var members = items.filter(g[1]).sort(function(a, b){ return (b.year || 0) - (a.year || 0); });
+    if (!members.length) return;
+    host.appendChild(el('p', 'pub-group', g[0]));
+    members.forEach(function(p){
+      n += 1;
+      var row = el('div', 'ref');
+      row.appendChild(el('div', 'num mono', (n < 10 ? '0' : '') + n));
+      var body = el('div');
+      var title = el('div', 'rtitle', p.title + ' ');
+      if (badges[p.status]) title.appendChild(el('span', 'badge', badges[p.status]));
+      if (p.category === 'data') title.appendChild(el('span', 'badge', p.kind === 'model' ? 'Model' : 'Dataset'));
+      body.appendChild(title);
+      var au = el('div', 'authors');
+      p.authors.forEach(function(a, i){
+        if (i) au.appendChild(document.createTextNode(i === p.authors.length - 1 ? ' and ' : ', '));
+        au.appendChild(a === owner ? el('strong', null, shown(a)) : document.createTextNode(shown(a)));
+      });
+      body.appendChild(au);
+      var bits = [];
+      if (p.status === 'under-review' || p.status === 'submitted') { bits.push('Submitted to ' + p.venue); }
+      else if (p.status === 'in-preparation') { bits.push('Manuscript in preparation'); }
+      else {
+        if (p.venue) bits.push(p.venue);
+        if (p.volume) bits.push('Vol. ' + p.volume + (p.issue ? '(' + p.issue + ')' : ''));
+        if (p.pages) bits.push(/[0-9][^0-9][0-9]/.test(p.pages) ? 'pp. ' + p.pages : 'Art. ' + p.pages);
+        if (p.version) bits.push('Version ' + p.version);
+        if (p.year) bits.push(String(p.year));
+      }
+      var venue = el('div', 'venue mono', bits.join(' · '));
+      if (p.doi) {
+        venue.appendChild(document.createTextNode(' · '));
+        var a = el('a', 'link', 'DOI ↗'); a.href = 'https://doi.org/' + p.doi; a.target = '_blank'; a.rel = 'noopener';
+        venue.appendChild(a);
+      }
+      body.appendChild(venue);
+      row.appendChild(body);
+      host.appendChild(row);
+    });
+  });
+  var up = document.getElementById('pub-updated');
+  if (up && data.updated) { var d = data.updated.split('-'); up.textContent = 'List updated ' + d[2] + '/' + d[1] + '/' + d[0]; }
+})();
+</script>
 <script>
 /* ---------- Streamline flow field (hero) ---------- */
 (function(){
