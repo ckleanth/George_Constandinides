@@ -200,6 +200,8 @@
   @media(min-width:920px){ .teach-grid{grid-template-columns:1fr 1fr} }
   .teach-grid .teach-card{margin-top:0;display:flex;flex-direction:column}
   .teach-grid .btn-row{margin-top:auto;padding-top:1.8rem}
+  @media(min-width:1100px){ .teach-grid.three{grid-template-columns:1fr 1fr 1fr} }
+  @media(min-width:920px) and (max-width:1099px){ .teach-grid.three .teach-card:nth-child(3){grid-column:1/-1} }
 
   /* ---------- PUBLICATIONS ---------- */
   .refs{margin-top:2.6rem}
@@ -540,9 +542,9 @@
 <!-- ============ RESEARCH ============ -->
 <section class="section" id="research">
   <div class="wrap">
-    <p class="eyebrow reveal">Research</p>
-    <h2 class="h2 reveal">Low-temperature plasma, simulated in two codes.</h2>
-    <div class="teach-grid">
+    <p class="eyebrow reveal">Research and capability</p>
+    <h2 class="h2 reveal">From plasma physics to Earth observation.</h2>
+    <div class="teach-grid three">
     <div class="teach-card reveal">
       <span class="teach-tag mono">Research results · plasma CFD</span>
       <h3>Simulating a Cold Plasma Jet</h3>
@@ -563,6 +565,18 @@
       </p>
       <div class="btn-row">
         <a class="btn" href="https://ckleanth.github.io/Plasma_CFD/" target="_blank" rel="noopener">Read the development <span class="arr">↗</span></a>
+      </div>
+    </div>
+    <div class="teach-card reveal">
+      <span class="teach-tag mono">Capability · Earth observation</span>
+      <h3>Earth Observation in Ten Practical Examples</h3>
+      <p>
+        Sentinel-2 change detection, radar, LiDAR, hyperspectral and thermal imagery, satellite-derived
+        bathymetry, image objects, a web map and the evaluation of machine learning, each on open or
+        generated data.
+      </p>
+      <div class="btn-row">
+        <a class="btn" href="https://ckleanth.github.io/Earth_Observation/" target="_blank" rel="noopener">See the examples <span class="arr">↗</span></a>
       </div>
     </div>
     </div>
