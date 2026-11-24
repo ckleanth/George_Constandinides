@@ -202,6 +202,7 @@
   .teach-grid .btn-row{margin-top:auto;padding-top:1.8rem}
   @media(min-width:1100px){ .teach-grid.three{grid-template-columns:1fr 1fr 1fr} }
   @media(min-width:920px) and (max-width:1099px){ .teach-grid.three .teach-card:nth-child(3){grid-column:1/-1} }
+  @media(min-width:920px){ .teach-grid:not(.three) > .teach-card:last-child:nth-child(odd){grid-column:1/-1} }
 
   /* ---------- PUBLICATIONS ---------- */
   .refs{margin-top:2.6rem}
@@ -440,7 +441,7 @@
       </div>
       <div class="field">
         <div class="fname">Explicit Dynamics</div>
-        <div class="fdesc">High-velocity impact and perforation of steel plates, solved in ANSYS Explicit Dynamics and cross-checked in LS-DYNA.</div>
+        <div class="fdesc">High-velocity impact and perforation. Non-linear analysis using ANSYS Explicit Dynamics and LS-DYNA.</div>
       </div>
       <div class="field">
         <div class="fname">Simulation Software</div>
@@ -580,6 +581,17 @@
       </p>
       <div class="btn-row">
         <a class="btn" href="https://ckleanth.github.io/Vehicle_Dynamics/" target="_blank" rel="noopener">See the track car <span class="arr">↗</span></a>
+      </div>
+    </div>
+    <div class="teach-card reveal">
+      <span class="teach-tag mono">Capability · explicit dynamics</span>
+      <h3>Case Study: High-Velocity Impact on a Thin Steel Plate</h3>
+      <p>
+        Lead, tool-steel and tungsten-alloy balls of 5&nbsp;mm against a 3&nbsp;mm steel plate at 300&nbsp;m/s,
+        the plate's ballistic limit, five models of a soft ball, and Autodyn and LS-DYNA on the same mesh.
+      </p>
+      <div class="btn-row">
+        <a class="btn" href="https://ckleanth.github.io/Explicit_Dynamics/" target="_blank" rel="noopener">See the impact study <span class="arr">↗</span></a>
       </div>
     </div>
     <div class="teach-card reveal">
