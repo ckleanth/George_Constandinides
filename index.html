@@ -143,6 +143,9 @@
   .field:hover{background:var(--bg-2)}
   .field .fname{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.1rem;line-height:1.22}
   .field .fdesc{margin-top:.55rem;color:var(--muted);font-size:.94rem;line-height:1.55}
+  /* nine fields: three by three from 920 px; two columns from 560 px, the odd last one across both */
+  @media (min-width:560px) and (max-width:919px){ .fields{grid-template-columns:repeat(2,minmax(0,1fr))} .fields .field:last-child:nth-child(odd){grid-column:1/-1} }
+  @media (min-width:920px){ .fields{grid-template-columns:repeat(3,minmax(0,1fr))} }
 
   /* ---------- TIMELINE / WORK ---------- */
   .timeline{margin-top:3.2rem;position:relative;padding-left:2.4rem}
@@ -412,32 +415,28 @@
 <section class="section" id="fields">
   <div class="wrap">
     <p class="eyebrow reveal">Fields of work</p>
-    <h2 class="h2 reveal">Eight connected disciplines, one method.</h2>
+    <h2 class="h2 reveal">Nine connected disciplines, one method.</h2>
     <p class="lede reveal">Describe the governing physics, then solve it — whether the domain is a combustion chamber, a landing gear, or the open ocean.</p>
     <div class="fields reveal">
-      <div class="field">
-        <div class="fname">Computational Fluid Dynamics</div>
-        <div class="fdesc">Multiphase, reacting, non-Newtonian, electro-magneto-hydrodynamic and low-temperature plasma flows, built and solved in ANSYS CFX and OpenFOAM.</div>
-      </div>
-      <div class="field">
-        <div class="fname">Multi-Body Dynamics</div>
-        <div class="fdesc">Mechanism, suspension, landing-gear and vehicle dynamics, modelled in MSC ADAMS, Project Chrono and MBSim and correlated with test data.</div>
-      </div>
       <div class="field">
         <div class="fname">Thermal Systems &amp; Heat Transfer</div>
         <div class="fdesc">Thermal management from the combustion chamber to the deep ocean.</div>
       </div>
       <div class="field">
-        <div class="fname">Hydraulics &amp; 1D Modelling</div>
-        <div class="fdesc">System-level models in AMESim and bespoke first-principles tools using Python or MATLAB for gas–liquid springs.</div>
+        <div class="fname">Computational Fluid Dynamics</div>
+        <div class="fdesc">Multiphase, reacting, non-Newtonian, electro-magneto-hydrodynamic and low-temperature plasma flows, built and solved in ANSYS CFX and OpenFOAM.</div>
       </div>
       <div class="field">
         <div class="fname">Systems Engineering</div>
         <div class="fdesc">Requirements definition, validation, and verification of complex coupled systems.</div>
       </div>
       <div class="field">
-        <div class="fname">Finite Element Analysis &amp; CAD</div>
-        <div class="fdesc">Structural assessment and design geometry for loaded mechanical components.</div>
+        <div class="fname">Multi-Body Dynamics</div>
+        <div class="fdesc">Mechanism, suspension, landing-gear and vehicle dynamics, modelled in MSC ADAMS, Project Chrono and MBSim and correlated with test data.</div>
+      </div>
+      <div class="field">
+        <div class="fname">Flight Dynamics</div>
+        <div class="fdesc">Rocket stability from subsonic to supersonic speeds: centre of pressure, normal force and static margin, by hand methods and by CFD in ANSYS CFX and OpenFOAM.</div>
       </div>
       <div class="field">
         <div class="fname">Explicit Dynamics</div>
@@ -445,7 +444,15 @@
       </div>
       <div class="field">
         <div class="fname">Simulation Software</div>
-        <div class="fdesc">Engineering analysis and data-processing tools written in Python or MATLAB.</div>
+        <div class="fdesc">First-principles engineering analysis and data-processing tools written in Python or MATLAB.</div>
+      </div>
+      <div class="field">
+        <div class="fname">Hydraulics &amp; 1D Modelling</div>
+        <div class="fdesc">System-level models in AMESim and bespoke first-principles tools using Python or MATLAB for gas–liquid springs.</div>
+      </div>
+      <div class="field">
+        <div class="fname">Finite Element Analysis &amp; CAD</div>
+        <div class="fdesc">Structural assessment and design geometry for loaded mechanical components.</div>
       </div>
     </div>
   </div>
@@ -592,6 +599,17 @@
       </p>
       <div class="btn-row">
         <a class="btn" href="https://ckleanth.github.io/Explicit_Dynamics/" target="_blank" rel="noopener">See the impact study <span class="arr">↗</span></a>
+      </div>
+    </div>
+    <div class="teach-card reveal">
+      <span class="teach-tag mono">Capability · flight dynamics</span>
+      <h3>Case Study: Static Stability of Rockets from Mach 0.1 to 2</h3>
+      <p>
+        Two model rockets in OpenFOAM from Mach 0.1 to 2, checked against Barrowman's and OpenRocket's
+        methods and Ansys CFX: where the normal force acts, and why even the shortest rocket is stable.
+      </p>
+      <div class="btn-row">
+        <a class="btn" href="https://ckleanth.github.io/Flight_Dynamics/" target="_blank" rel="noopener">See the rocket study <span class="arr">↗</span></a>
       </div>
     </div>
     <div class="teach-card reveal">
